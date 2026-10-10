@@ -68,6 +68,7 @@
             // txtUsuario
             // 
             txtUsuario.Location = new Point(12, 37);
+            txtUsuario.MaxLength = 50;
             txtUsuario.Name = "txtUsuario";
             txtUsuario.Size = new Size(209, 29);
             txtUsuario.TabIndex = 2;

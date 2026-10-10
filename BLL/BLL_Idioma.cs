@@ -16,7 +16,6 @@ namespace BLL
         {
             if (string.IsNullOrWhiteSpace(idioma.Nombre))
                 throw new Exception("El nombre del idioma no puede estar vacío.");
-            //
             dal.Agregar(idioma);
         }
     }

@@ -7,7 +7,7 @@ namespace Oasis_Sports
         static void Main()
         {
             
-            https://aka.ms/applicationconfiguration.
+            https:
             ApplicationConfiguration.Initialize();
             Application.Run(new FrmMenu());
         }

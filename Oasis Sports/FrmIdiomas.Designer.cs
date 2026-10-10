@@ -59,7 +59,7 @@ namespace Oasis_Sports
             // 
             // txtTexto
             // 
-            txtTexto.Location = new Point(29, 86);
+            txtTexto.Location = new Point(29, 95);
             txtTexto.Name = "txtTexto";
             txtTexto.Size = new Size(190, 29);
             txtTexto.TabIndex = 9;
@@ -73,7 +73,8 @@ namespace Oasis_Sports
             // 
             // btnGuardar
             // 
-            btnGuardar.BackColor = Color.Transparent;
+            btnGuardar.BackColor = Color.White;
+            btnGuardar.ForeColor = Color.DarkGreen;
             btnGuardar.Location = new Point(246, 47);
             btnGuardar.Name = "btnGuardar";
             btnGuardar.Size = new Size(130, 58);
@@ -84,7 +85,8 @@ namespace Oasis_Sports
             // 
             // btnNuevoIdioma
             // 
-            btnNuevoIdioma.BackColor = Color.Transparent;
+            btnNuevoIdioma.BackColor = Color.White;
+            btnNuevoIdioma.ForeColor = Color.DarkGreen;
             btnNuevoIdioma.Location = new Point(266, 92);
             btnNuevoIdioma.Name = "btnNuevoIdioma";
             btnNuevoIdioma.Size = new Size(130, 32);
@@ -95,7 +97,8 @@ namespace Oasis_Sports
             // 
             // btnCambiarIdioma
             // 
-            btnCambiarIdioma.BackColor = Color.Transparent;
+            btnCambiarIdioma.BackColor = Color.White;
+            btnCambiarIdioma.ForeColor = Color.DarkGreen;
             btnCambiarIdioma.Location = new Point(266, 315);
             btnCambiarIdioma.Name = "btnCambiarIdioma";
             btnCambiarIdioma.Size = new Size(130, 43);
@@ -106,42 +109,58 @@ namespace Oasis_Sports
             // 
             // lblIdiomaActivo
             // 
-            lblIdiomaActivo.Location = new Point(0, 0);
+            lblIdiomaActivo.AutoSize = true;
+            lblIdiomaActivo.ForeColor = Color.DarkGreen;
+            lblIdiomaActivo.Location = new Point(49, 294);
             lblIdiomaActivo.Name = "lblIdiomaActivo";
             lblIdiomaActivo.Size = new Size(100, 23);
             lblIdiomaActivo.TabIndex = 0;
+            lblIdiomaActivo.Text = "Idioma";
             // 
             // lblClaves
             // 
-            lblClaves.Location = new Point(0, 0);
+            lblClaves.AutoSize = true;
+            lblClaves.ForeColor = Color.DarkGreen;
+            lblClaves.Location = new Point(422, 62);
             lblClaves.Name = "lblClaves";
             lblClaves.Size = new Size(100, 23);
             lblClaves.TabIndex = 1;
+            lblClaves.Text = "Claves";
             // 
             // lblClave
             // 
-            lblClave.Location = new Point(0, 0);
+            lblClave.AutoSize = true;
+            lblClave.ForeColor = Color.DarkGreen;
+            lblClave.Location = new Point(29, 9);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(100, 23);
             lblClave.TabIndex = 2;
+            lblClave.Text = "Clave";
             // 
             // lblTexto
             // 
-            lblTexto.Location = new Point(0, 0);
+            lblTexto.AutoSize = true;
+            lblTexto.ForeColor = Color.DarkGreen;
+            lblTexto.Location = new Point(29, 68);
             lblTexto.Name = "lblTexto";
             lblTexto.Size = new Size(100, 23);
             lblTexto.TabIndex = 3;
+            lblTexto.Text = "Traducción";
             // 
             // lblNuevoIdioma
             // 
-            lblNuevoIdioma.Location = new Point(0, 0);
+            lblNuevoIdioma.AutoSize = true;
+            lblNuevoIdioma.ForeColor = Color.DarkGreen;
+            lblNuevoIdioma.Location = new Point(49, 66);
             lblNuevoIdioma.Name = "lblNuevoIdioma";
             lblNuevoIdioma.Size = new Size(100, 23);
             lblNuevoIdioma.TabIndex = 4;
+            lblNuevoIdioma.Text = "Nuevo idioma";
             // 
             // btnVolver
             // 
-            btnVolver.BackColor = Color.Transparent;
+            btnVolver.BackColor = Color.White;
+            btnVolver.ForeColor = Color.DarkGreen;
             btnVolver.Location = new Point(20, 405);
             btnVolver.Name = "btnVolver";
             btnVolver.Size = new Size(98, 38);
@@ -154,6 +173,7 @@ namespace Oasis_Sports
             // 
             lblIdioma.AutoSize = true;
             lblIdioma.Font = new Font("Times New Roman", 18F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblIdioma.ForeColor = Color.DarkGreen;
             lblIdioma.Location = new Point(247, 25);
             lblIdioma.Name = "lblIdioma";
             lblIdioma.Size = new Size(197, 27);
@@ -162,6 +182,8 @@ namespace Oasis_Sports
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(lblClave);
+            groupBox1.Controls.Add(lblTexto);
             groupBox1.Controls.Add(btnGuardar);
             groupBox1.Controls.Add(txtTexto);
             groupBox1.Controls.Add(txtClave);
@@ -174,14 +196,13 @@ namespace Oasis_Sports
             // FrmIdiomas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
+            BackColor = Color.FromArgb(224, 224, 224);
             ClientSize = new Size(700, 470);
             Controls.Add(groupBox1);
             Controls.Add(lblIdioma);
             Controls.Add(lstClaves);
             Controls.Add(lblIdiomaActivo);
             Controls.Add(lblClaves);
-            Controls.Add(lblClave);
-            Controls.Add(lblTexto);
             Controls.Add(lblNuevoIdioma);
             Controls.Add(cmbIdiomas);
             Controls.Add(btnCambiarIdioma);

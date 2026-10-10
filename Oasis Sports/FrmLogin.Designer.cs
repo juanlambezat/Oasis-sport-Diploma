@@ -42,14 +42,14 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(201, 111);
+            textBox1.Location = new Point(207, 111);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(221, 21);
             textBox1.TabIndex = 0;
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(201, 156);
+            textBox2.Location = new Point(207, 156);
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
             textBox2.Size = new Size(221, 21);

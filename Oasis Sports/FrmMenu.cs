@@ -163,7 +163,9 @@ namespace Oasis_Sports
             bITACORAToolStripMenuItem1.Visible = false;
             gESTIONDEUSUARIOSToolStripMenuItem.Visible = false;
             gESTIONDEPERFILESToolStripMenuItem.Visible = false;
-            gESTIONDERESERVASToolStripMenuItem.Visible = false;
+            rEGISTRARCLIENTEToolStripMenuItem.Visible = false;
+            vENTASToolStripMenuItem.Visible = false;
+            vENDEDORToolStripMenuItem.Visible = false;
             gESTIONDEIDIOMASToolStripMenuItem.Visible = false;
             bITACORADECAMBIOSToolStripMenuItem.Visible = false;
 
@@ -173,15 +175,25 @@ namespace Oasis_Sports
         {
             if (SessionManager.GetInstance().IsLogged())
             {
-                bITACORAToolStripMenuItem1.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "BTE");
-                gESTIONDEUSUARIOSToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "GUS");
-                gESTIONDERESERVASToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "GRE");
-                gESTIONDEPERFILESToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "GPE");
-                gESTIONDEIDIOMASToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "GID");
-                bITACORADECAMBIOSToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(SessionManager.GetInstance().Usuario.Id, "BDC");
+                int idUsuario = SessionManager.GetInstance().Usuario.Id;
 
+                bool verBitacora = permisoBLL.UsuarioTienePermiso(idUsuario, "BTE");
+                bool verUsuarios = permisoBLL.UsuarioTienePermiso(idUsuario, "GUS");
+                bool verPerfiles = permisoBLL.UsuarioTienePermiso(idUsuario, "GPE");
+                bool verCambios = permisoBLL.UsuarioTienePermiso(idUsuario, "BDC");
+                bool verVentas = permisoBLL.UsuarioTienePermiso(idUsuario, "VEN");
 
-                bitacoraToolStripMenuItem.Visible = true;
+                bITACORAToolStripMenuItem1.Visible = verBitacora;
+                gESTIONDEUSUARIOSToolStripMenuItem.Visible = verUsuarios;
+                gESTIONDEPERFILESToolStripMenuItem.Visible = verPerfiles;
+                bITACORADECAMBIOSToolStripMenuItem.Visible = verCambios;
+                gESTIONDEIDIOMASToolStripMenuItem.Visible = permisoBLL.UsuarioTienePermiso(idUsuario, "GID");
+
+                vENTASToolStripMenuItem.Visible = verVentas;
+                rEGISTRARCLIENTEToolStripMenuItem.Visible = verVentas;
+
+                bitacoraToolStripMenuItem.Visible = verBitacora || verUsuarios || verPerfiles || verCambios;
+                vENDEDORToolStripMenuItem.Visible = verVentas;
             }
         }
 
@@ -201,7 +213,32 @@ namespace Oasis_Sports
 
         private void gESTIONDEIDIOMASToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void jzat506_vENTASToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jzat506_FrmGenerarFactura frmGenerarFactura = new jzat506_FrmGenerarFactura();
+            frmGenerarFactura.Show();
+            this.Hide();
+        }
+
+        private void jzat506_rEGISTRARCLIENTEToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            jzat506_FrmRegistrarCliente frmRegistrarCliente = new jzat506_FrmRegistrarCliente();
+            frmRegistrarCliente.ShowDialog();
+        }
+
+        private void jzat506_cAMBIARCONTRASEÑAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!SessionManager.GetInstance().IsLogged())
+            {
+                MessageBox.Show("Debe iniciar sesión para cambiar la contraseña.");
+                return;
+            }
+
+            jzat506_FrmCambiarContrasenia frmCambiarContrasenia = new jzat506_FrmCambiarContrasenia();
+            frmCambiarContrasenia.ShowDialog();
         }
 
         private BLL_Permisos permisoBLL = new BLL_Permisos();

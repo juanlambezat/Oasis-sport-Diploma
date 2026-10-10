@@ -112,16 +112,28 @@ namespace Oasis_Sports
                 return;
             }
 
+            if (password.Length < 6)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (password != passwordRepetida)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            if (jzat506_UsuarioYaExiste(username, 0))
+            {
+                MessageBox.Show("Ya existe un usuario con ese nombre.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Usuario usuario = new Usuario()
             {
                 Username = username,
-                Password = password 
+                Password = password
             };
 
             bllUsuario.AñadirUsuario(usuario);
@@ -164,50 +176,53 @@ namespace Oasis_Sports
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-
             if (idUsuarioSeleccionado == 0)
             {
                 MessageBox.Show("Seleccione un usuario en la grilla.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-
-            
-            string usuarioLogueado = SessionManager.GetInstance().Usuario.Username;
-            if (txtUsuario.Text.Trim().Equals(usuarioLogueado, StringComparison.OrdinalIgnoreCase))
+            if (idUsuarioSeleccionado == SessionManager.GetInstance().Usuario.Id)
             {
                 MessageBox.Show("No puedes eliminar al usuario con el que estás logueado actualmente.", "Seguridad", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            DialogResult result = MessageBox.Show($"¿Está seguro que desea eliminar al usuario {txtUsuario.Text}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            Usuario? seleccionado = bllUsuario.Listar().FirstOrDefault(u => u.Id == idUsuarioSeleccionado);
+
+            if (seleccionado != null && seleccionado.Eliminado)
+            {
+                MessageBox.Show("El usuario ya fue eliminado.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string nombreUsuario = seleccionado?.Username ?? txtUsuario.Text;
+
+            DialogResult result = MessageBox.Show($"¿Está seguro que desea eliminar al usuario {nombreUsuario}?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 bllUsuario.EliminarUsuario(idUsuarioSeleccionado);
-              
-                MessageBox.Show("El Usuario fue eliminado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 bLL_DV.InicializarDVs();
+
+                BLL_Evento bllEvento = new BLL_Evento();
+
+                bllEvento.RegistrarEvento(new Evento()
+                {
+                    Usuario = SessionManager.GetInstance().Usuario.Username,
+                    Modulo = "Usuarios",
+                    Descripcion = "Eliminación de usuario: " + nombreUsuario,
+                    Fecha = DateTime.Now,
+                    Criticidad = 3
+                });
+
+                MessageBox.Show("El Usuario fue eliminado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            BLL_Evento bllEvento = new BLL_Evento();
-
-            bllEvento.RegistrarEvento(new Evento()
-            {
-                Usuario = SessionManager.GetInstance().Usuario.Username,
-                Modulo = "Usuarios",
-                Descripcion = "Eliminación de usuario",
-                Fecha = DateTime.Now,
-                Criticidad = 3
-            });
             dataGridView1.DataSource = bllUsuario.Listar();
 
             txtUsuario.Clear();
             txtContraseña.Clear();
-
-            bLL_DV.InicializarDVs();
             idUsuarioSeleccionado = 0;
-            
-
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -242,9 +257,21 @@ namespace Oasis_Sports
                 return;
             }
 
+            if (password.Length < 6)
+            {
+                MessageBox.Show("La contraseña debe tener al menos 6 caracteres.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (password != passwordRepetida)
             {
                 MessageBox.Show("Las contraseñas no coinciden.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (jzat506_UsuarioYaExiste(username, idUsuarioSeleccionado))
+            {
+                MessageBox.Show("Ya existe otro usuario con ese nombre.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -277,6 +304,12 @@ namespace Oasis_Sports
             FrmHistorialCambios frm = new FrmHistorialCambios(idUsuarioSeleccionado, usuario.Username);
             frm.ShowDialog();
             
+        }
+
+        private bool jzat506_UsuarioYaExiste(string username, int idExcluido)
+        {
+            return bllUsuario.Listar().Any(u => u.Id != idExcluido
+                && u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
         }
 
         private void FrmGestionUsuarios_FormClosing(object sender, FormClosingEventArgs e)

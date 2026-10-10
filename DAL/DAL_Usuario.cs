@@ -113,6 +113,22 @@ namespace DAL
             }
         }
 
+        public void jzat506_CambiarContrasenia(int idUsuario, string contraseniaNueva)
+        {
+            Conexion conexion = new Conexion();
+            SqlConnection cn = conexion.ObtenerConexion();
+            cn.Open();
+
+            string query = "UPDATE Usuarios SET Contraseña = @Contraseña WHERE Id_Usuario = @Id";
+
+            using (SqlCommand cmd = new SqlCommand(query, cn))
+            {
+                cmd.Parameters.AddWithValue("@Contraseña", encriptador.Encriptar(contraseniaNueva));
+                cmd.Parameters.AddWithValue("@Id", idUsuario);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         public Usuario ObtenerPorUsuario(string username)
         {
             Usuario usuario = null;
@@ -121,7 +137,7 @@ namespace DAL
             {
                 cn.Open();
 
-                string query = @"SELECT Id_Usuario, NomUsuario, Contraseña, Bloqueado FROM Usuarios WHERE NomUsuario = @Username";
+                string query = @"SELECT Id_Usuario, NomUsuario, Contraseña, Bloqueado, Eliminado FROM Usuarios WHERE NomUsuario = @Username ORDER BY Eliminado";
 
                 using (SqlCommand cmd = new SqlCommand(query, cn))
                 {
@@ -136,7 +152,8 @@ namespace DAL
                                 Id = Convert.ToInt32(reader["Id_Usuario"]),
                                 Username = reader["NomUsuario"].ToString(),
                                 Password = reader["Contraseña"].ToString(),
-                                Bloqueado = Convert.ToBoolean(reader["Bloqueado"])
+                                Bloqueado = Convert.ToBoolean(reader["Bloqueado"]),
+                                Eliminado = Convert.ToBoolean(reader["Eliminado"])
                             };
                         }
                     }

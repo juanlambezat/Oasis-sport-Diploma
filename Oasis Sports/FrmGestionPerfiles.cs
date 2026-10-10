@@ -178,6 +178,16 @@ namespace Oasis_Sports
                 return;
             }
 
+            List<ComponentePermiso> permisosDirectos = permisoBLL.ObtenerPermisosUsuario(usuario.Id);
+            if (permisosDirectos.Any(p => p.Id == permiso.Id))
+            {
+                MessageBox.Show(
+                    $"El usuario '{usuario.Username}' ya tiene asignado el permiso '{permiso.Nombre}'.",
+                    "Permiso repetido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
 
             permisoBLL.AsignarPermiso(usuario.Id, permiso.Id);
             CargarPermisosAsignados(usuario.Id);

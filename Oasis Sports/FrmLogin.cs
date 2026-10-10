@@ -215,7 +215,7 @@ namespace Oasis_Sports
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             textBox2.Text = "1234";
-            textBox1.Text = "Lucas";
+            textBox1.Text = "jondem";
             LanguageManager.GetInstance().TraducirControles(this);
             RegistrarClaves();
         }

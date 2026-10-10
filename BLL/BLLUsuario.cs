@@ -42,6 +42,41 @@ namespace BLL
             DAL_Usuario.EliminarUsuario(idUsuario);
         }
 
+        public void jzat506_CambiarContrasenia(int idUsuario, string username, string contraseniaActual, string contraseniaNueva)
+        {
+            jzat506_ValidarContraseniaNueva(contraseniaActual, contraseniaNueva);
+
+            Usuario usuario = DAL_Usuario.ObtenerPorUsuario(username);
+
+            if (usuario == null)
+                throw new System.Exception("No se encontró el usuario.");
+
+            Encriptacion encriptadorLocal = new Encriptacion();
+
+            if (usuario.Password != encriptadorLocal.Encriptar(contraseniaActual))
+                throw new System.Exception("La contraseña actual es incorrecta.");
+
+            DAL_Usuario.jzat506_CambiarContrasenia(idUsuario, contraseniaNueva);
+        }
+
+        private void jzat506_ValidarContraseniaNueva(string contraseniaActual, string contraseniaNueva)
+        {
+            if (string.IsNullOrWhiteSpace(contraseniaNueva))
+                throw new System.Exception("Debe ingresar una contraseña nueva.");
+
+            if (contraseniaNueva.Length < 6)
+                throw new System.Exception("La contraseña nueva debe tener al menos 6 caracteres.");
+
+            if (contraseniaNueva.Any(char.IsWhiteSpace))
+                throw new System.Exception("La contraseña nueva no puede contener espacios.");
+
+            if (!contraseniaNueva.Any(char.IsLetter) || !contraseniaNueva.Any(char.IsDigit))
+                throw new System.Exception("La contraseña nueva debe incluir al menos una letra y un número.");
+
+            if (contraseniaNueva == contraseniaActual)
+                throw new System.Exception("La contraseña nueva no puede ser igual a la actual.");
+        }
+
         private Encriptacion encriptador = new Encriptacion();
 
         private int intentosFallidos = 0;
@@ -59,7 +94,7 @@ namespace BLL
 
             Usuario usuario = DAL_Usuario.ObtenerPorUsuario(username);
 
-            if (usuario == null)
+            if (usuario == null || usuario.Eliminado)
                 throw new Exception("Usuario o contraseña incorrectos.");
 
             if (usuario.Bloqueado)

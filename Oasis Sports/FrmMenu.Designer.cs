@@ -20,12 +20,15 @@ namespace Oasis_Sports
             uSUARIOToolStripMenuItem = new ToolStripMenuItem();
             lOGINToolStripMenuItem = new ToolStripMenuItem();
             lOGOUTToolStripMenuItem = new ToolStripMenuItem();
+            cAMBIARCONTRASEÑAToolStripMenuItem = new ToolStripMenuItem();
             bitacoraToolStripMenuItem = new ToolStripMenuItem();
             bITACORAToolStripMenuItem1 = new ToolStripMenuItem();
             gESTIONDEUSUARIOSToolStripMenuItem = new ToolStripMenuItem();
             gESTIONDEPERFILESToolStripMenuItem = new ToolStripMenuItem();
+            rEGISTRARCLIENTEToolStripMenuItem = new ToolStripMenuItem();
             bITACORADECAMBIOSToolStripMenuItem = new ToolStripMenuItem();
-            gESTIONDERESERVASToolStripMenuItem = new ToolStripMenuItem();
+            vENDEDORToolStripMenuItem = new ToolStripMenuItem();
+            vENTASToolStripMenuItem = new ToolStripMenuItem();
             gESTIONDEIDIOMASToolStripMenuItem = new ToolStripMenuItem();
             sELECCIONARIDIOMAToolStripMenuItem = new ToolStripMenuItem();
             cREARIDIOMAToolStripMenuItem = new ToolStripMenuItem();
@@ -35,7 +38,7 @@ namespace Oasis_Sports
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { uSUARIOToolStripMenuItem, bitacoraToolStripMenuItem, gESTIONDERESERVASToolStripMenuItem, gESTIONDEIDIOMASToolStripMenuItem, sALIRToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { uSUARIOToolStripMenuItem, bitacoraToolStripMenuItem, vENDEDORToolStripMenuItem, gESTIONDEIDIOMASToolStripMenuItem, sALIRToolStripMenuItem });
             menuStrip1.Location = new Point(2, 2);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(796, 24);
@@ -44,7 +47,7 @@ namespace Oasis_Sports
             // 
             // uSUARIOToolStripMenuItem
             // 
-            uSUARIOToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lOGINToolStripMenuItem, lOGOUTToolStripMenuItem });
+            uSUARIOToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { lOGINToolStripMenuItem, lOGOUTToolStripMenuItem, cAMBIARCONTRASEÑAToolStripMenuItem });
             uSUARIOToolStripMenuItem.Font = new Font("Times New Roman", 10F);
             uSUARIOToolStripMenuItem.Name = "uSUARIOToolStripMenuItem";
             uSUARIOToolStripMenuItem.Size = new Size(78, 20);
@@ -63,6 +66,13 @@ namespace Oasis_Sports
             lOGOUTToolStripMenuItem.Size = new Size(130, 22);
             lOGOUTToolStripMenuItem.Text = "LOGOUT";
             lOGOUTToolStripMenuItem.Click += lOGOUTToolStripMenuItem_Click;
+            //
+            // cAMBIARCONTRASEÑAToolStripMenuItem
+            //
+            cAMBIARCONTRASEÑAToolStripMenuItem.Name = "cAMBIARCONTRASEÑAToolStripMenuItem";
+            cAMBIARCONTRASEÑAToolStripMenuItem.Size = new Size(130, 22);
+            cAMBIARCONTRASEÑAToolStripMenuItem.Text = "CAMBIAR CONTRASEÑA";
+            cAMBIARCONTRASEÑAToolStripMenuItem.Click += jzat506_cAMBIARCONTRASEÑAToolStripMenuItem_Click;
             // 
             // bitacoraToolStripMenuItem
             // 
@@ -95,22 +105,37 @@ namespace Oasis_Sports
             gESTIONDEPERFILESToolStripMenuItem.Size = new Size(217, 22);
             gESTIONDEPERFILESToolStripMenuItem.Text = "GESTION DE PERFILES";
             gESTIONDEPERFILESToolStripMenuItem.Click += gESTIONDEPERFILESToolStripMenuItem_Click;
-            // 
+            //
             // bITACORADECAMBIOSToolStripMenuItem
             // 
             bITACORADECAMBIOSToolStripMenuItem.Name = "bITACORADECAMBIOSToolStripMenuItem";
             bITACORADECAMBIOSToolStripMenuItem.Size = new Size(217, 22);
             bITACORADECAMBIOSToolStripMenuItem.Text = "BITACORA DE CAMBIOS";
             bITACORADECAMBIOSToolStripMenuItem.Click += bITACORADECAMBIOSToolStripMenuItem_Click;
-            // 
-            // gESTIONDERESERVASToolStripMenuItem
-            // 
-            gESTIONDERESERVASToolStripMenuItem.Font = new Font("Times New Roman", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            gESTIONDERESERVASToolStripMenuItem.Name = "gESTIONDERESERVASToolStripMenuItem";
-            gESTIONDERESERVASToolStripMenuItem.Size = new Size(149, 20);
-            gESTIONDERESERVASToolStripMenuItem.Text = "GESTION DE RESERVAS";
-            gESTIONDERESERVASToolStripMenuItem.Visible = false;
-            // 
+            //
+            // vENDEDORToolStripMenuItem
+            //
+            vENDEDORToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { vENTASToolStripMenuItem, rEGISTRARCLIENTEToolStripMenuItem });
+            vENDEDORToolStripMenuItem.Font = new Font("Times New Roman", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            vENDEDORToolStripMenuItem.Name = "vENDEDORToolStripMenuItem";
+            vENDEDORToolStripMenuItem.Size = new Size(78, 20);
+            vENDEDORToolStripMenuItem.Text = "VENDEDOR";
+            vENDEDORToolStripMenuItem.Visible = false;
+            //
+            // vENTASToolStripMenuItem
+            //
+            vENTASToolStripMenuItem.Name = "vENTASToolStripMenuItem";
+            vENTASToolStripMenuItem.Size = new Size(217, 22);
+            vENTASToolStripMenuItem.Text = "VENTAS";
+            vENTASToolStripMenuItem.Click += jzat506_vENTASToolStripMenuItem_Click;
+            //
+            // rEGISTRARCLIENTEToolStripMenuItem
+            //
+            rEGISTRARCLIENTEToolStripMenuItem.Name = "rEGISTRARCLIENTEToolStripMenuItem";
+            rEGISTRARCLIENTEToolStripMenuItem.Size = new Size(217, 22);
+            rEGISTRARCLIENTEToolStripMenuItem.Text = "GESTION DE CLIENTES";
+            rEGISTRARCLIENTEToolStripMenuItem.Click += jzat506_rEGISTRARCLIENTEToolStripMenuItem_Click;
+            //
             // gESTIONDEIDIOMASToolStripMenuItem
             // 
             gESTIONDEIDIOMASToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { sELECCIONARIDIOMAToolStripMenuItem, cREARIDIOMAToolStripMenuItem });
@@ -171,12 +196,15 @@ namespace Oasis_Sports
         private ToolStripMenuItem lOGINToolStripMenuItem;
         private ToolStripMenuItem sALIRToolStripMenuItem;
         private ToolStripMenuItem lOGOUTToolStripMenuItem;
+        private ToolStripMenuItem cAMBIARCONTRASEÑAToolStripMenuItem;
         private ToolStripMenuItem bitacoraToolStripMenuItem;
         private ToolStripMenuItem bITACORAToolStripMenuItem1;
         private ToolStripMenuItem gESTIONDEUSUARIOSToolStripMenuItem;
         private ToolStripMenuItem gESTIONDEPERFILESToolStripMenuItem;
-        private ToolStripMenuItem gESTIONDERESERVASToolStripMenuItem;
-        private ToolStripMenuItem gESTIONDEIDIOMASToolStripMenuItem;   // ← nuevo
+        private ToolStripMenuItem rEGISTRARCLIENTEToolStripMenuItem;
+        private ToolStripMenuItem vENDEDORToolStripMenuItem;
+        private ToolStripMenuItem vENTASToolStripMenuItem;
+        private ToolStripMenuItem gESTIONDEIDIOMASToolStripMenuItem;
         private ToolStripMenuItem bITACORADECAMBIOSToolStripMenuItem;
         private ToolStripMenuItem sELECCIONARIDIOMAToolStripMenuItem;
         private ToolStripMenuItem cREARIDIOMAToolStripMenuItem;

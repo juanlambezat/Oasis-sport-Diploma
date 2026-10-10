@@ -30,7 +30,7 @@ namespace DAL
        
         public Conexion()
         {
-            conexion = new SqlConnection(cadena1);
+            conexion = new SqlConnection(cadena2);
         }
 
        
